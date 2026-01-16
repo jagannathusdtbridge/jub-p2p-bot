@@ -121,14 +121,17 @@ async def calc(ctx, buyer_rate: float, seller_rate: float, buyer_usdt: float, ky
 # ---------- MODERATION ----------
 @bot.command()
 @commands.has_role(ADMIN_ROLE)
-async def ban(ctx, member: discord.Member, *, reason=""):
-    await member.ban(reason=reason)
-    await ctx.send("🔨 User banned.")
-
-@bot.command()
-@commands.has_role(ADMIN_ROLE)
 async def kick(ctx, member: discord.Member, *, reason=""):
     await member.kick(reason=reason)
     await ctx.send("👢 User kicked.")
+
+
+# ===== BOT START (DO NOT CHANGE BELOW) =====
+import os
+
+TOKEN = os.environ.get("DISCORD_TOKEN")
+
+if not TOKEN:
+    raise ValueError("DISCORD_TOKEN is missing in Render Environment Variables")
 
 bot.run(TOKEN)
